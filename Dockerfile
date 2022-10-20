@@ -6,12 +6,15 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+ARG TELERIK_USERNAME=%TELERIK_USERNAME%
+ARG TELERIK_PASSWORD=%TELERIK_PASSWORD%
 WORKDIR /src
+COPY ["NuGet.Config", "."]
 COPY ["TelerikReportingRestService.csproj", "."]
-RUN dotnet restore "./TelerikReportingRestService.csproj"
+RUN dotnet restore "./TelerikReportingRestService.csproj" --configfile "./NuGet.Config"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "TelerikReportingRestService.csproj" -c Release -o /app/build
+RUN dotnet build "TelerikReportingRestService.csproj" -c Release -o /app/build --no-restore
 
 FROM build AS publish
 RUN dotnet publish "TelerikReportingRestService.csproj" -c Release -o /app/publish /p:UseAppHost=false
@@ -19,7 +22,6 @@ RUN dotnet publish "TelerikReportingRestService.csproj" -c Release -o /app/publi
 FROM base AS final
 # install System.Drawing native dependencies
 WORKDIR /app
-
 COPY --from=publish /app/publish .
 RUN apt-get update \
     && apt-get install -y --allow-unauthenticated \

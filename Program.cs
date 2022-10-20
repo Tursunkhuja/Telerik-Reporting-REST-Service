@@ -4,12 +4,6 @@ using Telerik.Reporting.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddCors(c =>
-{
-    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-});
-
 builder.Services.AddControllers().AddNewtonsoftJson();
 
 var reportsPath = Path.Combine(builder.Environment.WebRootPath);
@@ -18,22 +12,30 @@ var reportsPath = Path.Combine(builder.Environment.WebRootPath);
 builder.Services.TryAddSingleton<IReportServiceConfiguration>(sp =>
     new ReportServiceConfiguration
     {
-        // The default ReportingEngineConfiguration will be initialized from appsettings.json or appsettings.{EnvironmentName}.json:
-        ReportingEngineConfiguration = sp.GetService<IConfiguration>(),
-
-        // In case the ReportingEngineConfiguration needs to be loaded from a specific configuration file, use the approach below:
-        //ReportingEngineConfiguration = ResolveSpecificReportingConfiguration(sp.GetService<IWebHostEnvironment>()),
-        HostAppId = "Net6RestServiceWithCors",
+        ReportingEngineConfiguration = sp.GetService<IConfiguration>(), //uses default configuration
+        HostAppId = "TelerikReportingRestService", // host app ID for this app
         Storage = new FileStorage(),
-        ReportSourceResolver = new TypeReportSourceResolver()
-            .AddFallbackResolver(
-                new UriReportSourceResolver(reportsPath))
+        ReportSourceResolver = new TypeReportSourceResolver().AddFallbackResolver(new UriReportSourceResolver(reportsPath))
     });
+
+// CORS policy that will allow any origin. We use this for the ReportsController (might not be appropriate for other controllers)
+builder.Services.AddCors(c =>
+{
+    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+});
+
 
 var app = builder.Build();
 
+// Allows the use of static files
+app.UseStaticFiles();
+
 app.UseRouting();
+
+// Enable the CORS policy
 app.UseCors("AllowOrigin");
+
+// enable use of the API controllers
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
