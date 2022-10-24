@@ -4,6 +4,13 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
+# Depenencies for Telerik Reporting on Linux
+RUN apt-get update \
+    && apt-get install -y --allow-unauthenticated \
+        libc6-dev \
+        libgdiplus \
+        libx11-dev \
+     && rm -rf /var/lib/apt/lists/*
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG TELERIK_USERNAME=%TELERIK_USERNAME%
@@ -23,11 +30,4 @@ FROM base AS final
 # install System.Drawing native dependencies
 WORKDIR /app
 COPY --from=publish /app/publish .
-RUN apt-get update \
-    && apt-get install -y --allow-unauthenticated \
-        libc6-dev \
-        libgdiplus \
-        libx11-dev \
-     && rm -rf /var/lib/apt/lists/*
-
 ENTRYPOINT ["dotnet", "TelerikReportingRestService.dll"]
