@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers().AddNewtonsoftJson();
 
-var reportsPath = Path.Combine(builder.Environment.WebRootPath);
+var reportsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports");
 
 // CORS policy that will allow any origin. We use this for the ReportsController (might not be appropriate for other controllers)
 builder.Services.AddCors(c =>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Telerik Web Report Designer Demo</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="webReportDesigner" class="">
+        loading...
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2022.1.301/js/kendo.all.min.js"></script>
+    <script src="https://reporting.cdn.telerik.com/16.2.22.914/js/telerikReportViewer.min.js"></script>
+    <script src="https://reporting.cdn.telerik.com/16.2.22.914/js/webReportDesigner.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#webReportDesigner").telerik_WebReportDesigner({
+                toolboxArea: {
+                    layout: "list" //Change to "grid" to display the contents of the Components area in a flow grid layout.
+                },
+                serviceUrl: "http://localhost:49152/reporting/api/reportdesigner/",
+                report: "Barcodes Report.trdp",
+            }).data("telerik_WebDesigner");
+        });
+    </script>
+
+</body>
+</html>
