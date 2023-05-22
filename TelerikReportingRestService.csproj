@@ -14,6 +14,9 @@
     <Content Include="Reports\Barcodes Report.trdp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Reports\Orders report.trdx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -25,9 +28,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-	<PackageReference Include="Telerik.Reporting.OpenXmlRendering" Version="16.2.22.914" />
-	<PackageReference Include="Telerik.Reporting.Services.AspNetCore" Version="16.2.22.914" />
-	<PackageReference Include="Telerik.WebReportDesigner.Services" Version="16.2.22.914" />
+	<PackageReference Include="Telerik.Reporting.OpenXmlRendering" Version="17.0.23.315" />
+	<PackageReference Include="Telerik.Reporting.Services.AspNetCore" Version="17.0.23.315" />
+	<PackageReference Include="Telerik.WebReportDesigner.Services" Version="17.0.23.315" />
   </ItemGroup>
 
   <ItemGroup>
