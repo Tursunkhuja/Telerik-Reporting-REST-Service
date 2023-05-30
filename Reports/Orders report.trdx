@@ -133,7 +133,7 @@
               <ReportItem>
                 <TextBox Width="0.933in" Height="0.19in" Left="0in" Top="0in" Value="Order ID" CanGrow="False" Name="textBox3" StyleName="Label">
                   <Style BackgroundColor="White" TextAlign="Left" VerticalAlign="Middle">
-                    <Font Size="8pt" />
+                    <Font Size="8pt" Bold="True" />
                     <Padding Left="0.05in" Right="0.05in" />
                   </Style>
                   <Action>
@@ -153,7 +153,7 @@
               <ReportItem>
                 <TextBox Width="0.907in" Height="0.19in" Left="0in" Top="0in" Value="Customer ID" CanGrow="False" Name="textBox43" StyleName="Label">
                   <Style BackgroundColor="White" VerticalAlign="Middle">
-                    <Font Size="8pt" />
+                    <Font Size="8pt" Bold="True" />
                     <Padding Left="0.05in" />
                   </Style>
                   <Action>
@@ -173,7 +173,7 @@
               <ReportItem>
                 <TextBox Width="2.281in" Height="0.19in" Left="0in" Top="0in" Value="Order date" CanGrow="False" Name="textBox15" StyleName="Label">
                   <Style BackgroundColor="White" VerticalAlign="Middle">
-                    <Font Size="8pt" />
+                    <Font Size="8pt" Bold="True" />
                     <Padding Left="0.05in" Right="0.05in" />
                   </Style>
                   <Action>
@@ -193,7 +193,7 @@
               <ReportItem>
                 <TextBox Width="1.489in" Height="0.19in" Left="0in" Top="0in" Value="Shipped date" CanGrow="False" Name="textBox23" StyleName="Label">
                   <Style BackgroundColor="White" TextAlign="Left" VerticalAlign="Middle">
-                    <Font Size="8pt" />
+                    <Font Size="8pt" Bold="True" />
                     <Padding Left="0.05in" Right="0.05in" />
                   </Style>
                   <Action>
@@ -213,7 +213,7 @@
               <ReportItem>
                 <TextBox Width="2.162in" Height="0.19in" Left="0in" Top="0in" Value="Ship name" CanGrow="False" Name="textBox7" StyleName="Label">
                   <Style BackgroundColor="White" TextAlign="Left" VerticalAlign="Middle">
-                    <Font Size="8pt" />
+                    <Font Size="8pt" Bold="True" />
                     <Padding Left="0.05in" Right="0.05in" />
                   </Style>
                   <Action>
@@ -233,7 +233,7 @@
               <ReportItem>
                 <TextBox Width="1.385in" Height="0.19in" Left="0in" Top="0in" Value="Ship address" CanGrow="False" Name="textBox48" StyleName="Label">
                   <Style BackgroundColor="White" TextAlign="Right" VerticalAlign="Middle">
-                    <Font Size="8pt" />
+                    <Font Size="8pt" Bold="True" />
                     <Padding Left="0.05in" Right="0.05in" />
                   </Style>
                   <Action>
@@ -253,7 +253,7 @@
               <ReportItem>
                 <TextBox Width="0.917in" Height="0.19in" Left="0in" Top="0in" Value="Ship country" Format="{0:N2}" CanGrow="False" Name="textBox14" StyleName="Label">
                   <Style BackgroundColor="White" TextAlign="Right" VerticalAlign="Middle">
-                    <Font Size="8pt" />
+                    <Font Size="8pt" Bold="True" />
                     <Padding Left="0.05in" Right="0.05in" />
                   </Style>
                   <Action>
@@ -275,7 +275,11 @@
     </DetailSection>
     <PageHeaderSection Height="0.8in" Name="pageHeaderSection1">
       <Items>
-        <TextBox Width="4.2in" Height="0.3in" Left="3.151in" Top="0in" Value="Order Detail Report" Anchoring="Left" Name="textBox36" StyleName="ReportName" />
+        <TextBox Width="4.2in" Height="0.3in" Left="3.151in" Top="0in" Value="Order Detail Report" Anchoring="Left" Name="textBox36" StyleName="ReportName">
+          <Style>
+            <Font Bold="True" />
+          </Style>
+        </TextBox>
       </Items>
       <Bindings>
         <Binding Path="Visible" Expression="= IndexOfSubstr(RenderingFormat.Name,&quot;Interactive&quot;)=-1" />
