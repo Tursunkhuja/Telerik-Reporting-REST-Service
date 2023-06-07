@@ -50,4 +50,27 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
 });
 
+
+EnableTracing();
+CopyFontsInLinux();
+
 app.Run();
+
+
+
+static void EnableTracing()
+{
+    System.Diagnostics.Trace.Listeners.Add(new System.Diagnostics.TextWriterTraceListener(File.CreateText("log.txt")));
+    System.Diagnostics.Trace.AutoFlush = true;
+}
+
+static void CopyFontsInLinux()
+{
+    var fonts = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "ReportingFonts"), "*.ttf");
+    string fontFolder = @"/usr/share/fonts";
+    foreach (var font in fonts)
+    {
+        var destFileName = Path.Combine(fontFolder, Path.GetFileName(font));
+        File.Copy(font, destFileName, true);
+    }
+}
