@@ -402,7 +402,4 @@
       </Selectors>
     </StyleRule>
   </StyleSheet>
-  <ExternalStyleSheets>
-    <ExternalStyleSheet Kind="Absolute" Path="C:\Repos\Koble\Features\ERP\General\Reporting\StyleSheet.trs" />
-  </ExternalStyleSheets>
 </Report>

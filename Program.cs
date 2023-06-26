@@ -66,7 +66,7 @@ static void EnableTracing()
 
 static void CopyFontsInLinux()
 {
-    var fonts = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "ReportingFonts"), "*.ttf");
+    var fonts = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "Fonts"), "*.ttf");
     string fontFolder = @"/usr/share/fonts";
     foreach (var font in fonts)
     {
