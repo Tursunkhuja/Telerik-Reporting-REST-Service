@@ -10,7 +10,7 @@
   <Items>
     <DetailSection Height="1.7in" Name="detailSection1">
       <Items>
-        <Table DataSourceName="Orders" Width="10.074in" Height="0.745in" Left="0in" Top="0.3in" RowHeadersPrintOnEveryPage="True" ColumnHeadersPrintOnEveryPage="True" FreezeRowHeaders="True" FreezeColumnHeaders="True" Name="DetailTable" StyleName="Normal.TableNormal">
+        <Table DataSourceName="Orders" Width="10.074in" Height="0.745in" Left="0in" Top="0.5in" RowHeadersPrintOnEveryPage="True" ColumnHeadersPrintOnEveryPage="True" FreezeRowHeaders="True" FreezeColumnHeaders="True" Name="DetailTable" StyleName="Normal.TableNormal">
           <Body>
             <Cells>
               <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
@@ -280,6 +280,8 @@
             <Font Bold="True" />
           </Style>
         </TextBox>
+        <TextBox Width="1.2in" Height="0.2in" Left="4.41in" Top="0.5in" Value="= Parameters.TestParam.Value" Name="textBox2" />
+        <TextBox Width="1.2in" Height="0.2in" Left="3.1in" Top="0.5in" Value="textBox4" Name="textBox4" />
       </Items>
       <Bindings>
         <Binding Path="Visible" Expression="= IndexOfSubstr(RenderingFormat.Name,&quot;Interactive&quot;)=-1" />
@@ -402,4 +404,11 @@
       </Selectors>
     </StyleRule>
   </StyleSheet>
+  <ReportParameters>
+    <ReportParameter Name="TestParam" Text="Testparameter" Visible="True">
+      <Value>
+        <String>test</String>
+      </Value>
+    </ReportParameter>
+  </ReportParameters>
 </Report>

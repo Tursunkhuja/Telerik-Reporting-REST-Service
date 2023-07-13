@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System.Runtime.InteropServices;
 using Telerik.Reporting.Cache.File;
 using Telerik.Reporting.Services;
 using Telerik.WebReportDesigner.Services;
@@ -15,6 +16,7 @@ builder.Services.AddCors(c =>
     c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 });
 
+IReportSourceResolver customReportResolver = new CustomReportResolver();
 // Configure dependencies for ReportsController.
 builder.Services.TryAddSingleton<IReportServiceConfiguration>(sp =>
     new ReportServiceConfiguration
@@ -22,7 +24,7 @@ builder.Services.TryAddSingleton<IReportServiceConfiguration>(sp =>
         ReportingEngineConfiguration = sp.GetService<IConfiguration>(), //uses default configuration
         HostAppId = "TelerikReportingRestService", // host app ID for this app
         Storage = new FileStorage(),
-        ReportSourceResolver = new TypeReportSourceResolver().AddFallbackResolver(new UriReportSourceResolver(reportsPath))
+        ReportSourceResolver = new TypeReportSourceResolver().AddFallbackResolver(customReportResolver)
     });
 
 #region Web Designer Services
@@ -52,7 +54,11 @@ app.UseEndpoints(endpoints =>
 
 
 EnableTracing();
-CopyFontsInLinux();
+
+if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+{
+    CopyFontsInLinux();
+}
 
 app.Run();
 
