@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System.Runtime.InteropServices;
 using Telerik.Reporting.Cache.File;
 using Telerik.Reporting.Services;
 using Telerik.WebReportDesigner.Services;
@@ -52,10 +53,12 @@ app.UseEndpoints(endpoints =>
 
 
 EnableTracing();
-CopyFontsInLinux();
+if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+{
+    CopyFontsInLinux();
+}
 
 app.Run();
-
 
 
 static void EnableTracing()
