@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report Width="10.5in" Name="TransactionDetails" xmlns="http://schemas.telerik.com/reporting/2023/2.0">
+<Report Width="10.5in" Name="TransactionDetails" xmlns="http://schemas.telerik.com/reporting/2023/1.0">
   <DataSources>
-    <WebServiceDataSource ParameterValues="{&quot;$select&quot;:}" AuthParameterValues="null" ServiceUrl="https://services.odata.org/V4/Northwind/Northwind.svc/Orders" DataSelector="value" Name="Orders">
+    <WebServiceDataSource ParameterValues="{&quot;$select&quot;:,&quot;$top&quot;:}" AuthParameterValues="null" ServiceUrl="https://localhost:7196/Orders" DataSelector="value" Name="Orders">
       <Source>
         <String></String>
       </Source>
-      <Parameters>
-        <WebServiceParameter WebServiceParameterType="Query" Name="$select">
-          <Value>
-            <String>OrderID,CustomerID,OrderDate,ShippedDate,ShipName,ShipAddress,ShipCountry</String>
-          </Value>
-        </WebServiceParameter>
-      </Parameters>
     </WebServiceDataSource>
   </DataSources>
   <Items>
@@ -287,6 +280,7 @@
             <Font Bold="True" />
           </Style>
         </TextBox>
+        <TextBox Width="1.2in" Height="0.2in" Left="4.6in" Top="0.5in" Value="= Parameters.CompanyName.Value" Name="textBox2" />
       </Items>
       <Bindings>
         <Binding Path="Visible" Expression="= IndexOfSubstr(RenderingFormat.Name,&quot;Interactive&quot;)=-1" />
@@ -409,4 +403,23 @@
       </Selectors>
     </StyleRule>
   </StyleSheet>
+  <ReportParameters>
+    <ReportParameter Name="CompanyName">
+      <Value>
+        <String>Test Company</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="CustomerID" Text="Customer ID">
+      <AvailableValues DataSourceName="Orders" ValueMember="= Fields.CustomerID" />
+      <Value>
+        <String>= Fields.CustomerID</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="OrderID" Type="Integer" Text="Order ID">
+      <AvailableValues DataSourceName="Orders" ValueMember="= Fields.OrderID" />
+      <Value>
+        <String>= Fields.OrderID</String>
+      </Value>
+    </ReportParameter>
+  </ReportParameters>
 </Report>
