@@ -1,5 +1,5 @@
 # Telerik Reporting REST Service
-This is Telerik Reporting REST Service project that we use for testing different use cases such as testing features and also reproducing different issues and share them.
+This is Telerik Reporting REST Service project that we use for testing purposes such as testing features and also reproducing different issues and share them.
 
 **Docker** (Linux OS) also is enabled. So, you can run this project via Docker. Then you can test Telerik Reporting functionalities in Linux environment.
 
