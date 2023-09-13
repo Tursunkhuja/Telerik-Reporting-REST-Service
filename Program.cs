@@ -1,4 +1,6 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using System.Runtime.InteropServices;
 using Telerik.Reporting.Cache.File;
 using Telerik.Reporting.Services;
@@ -35,6 +37,16 @@ builder.Services.TryAddSingleton<IReportDesignerServiceConfiguration>(sp => new 
 });
 #endregion
 
+#region OpenTelemetry
+builder.Services.AddOpenTelemetryTracing(b =>
+{
+    b.SetResourceBuilder(
+        ResourceBuilder.CreateDefault().AddService(builder.Environment.ApplicationName))
+    .AddAspNetCoreInstrumentation()
+    .AddOtlpExporter(opts => { opts.Endpoint = new Uri("http://localhost:4317/"); });
+});
+#endregion
+
 var app = builder.Build();
 
 // Allows the use of static files
@@ -52,7 +64,7 @@ app.UseEndpoints(endpoints =>
 });
 
 
-EnableTracing();
+//EnableTracing();
 if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
 {
     CopyFontsInLinux();
